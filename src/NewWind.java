@@ -49,7 +49,7 @@ public class NewWind {
 	JTextField jTextField1 = new JTextField();
 	JTextField jTextField2 = new JTextField();
 	JButton jButton8 = new JButton();
-	JButton jButton9 = new JButton();
+	JButton jButtonLoginLogin = new JButton();
 	JLabel jLabelLoginUserName = new JLabel();
 	JLabel jLabelLoginPassword = new JLabel();
 	
@@ -209,8 +209,8 @@ public class NewWind {
 		
 		jButton8 = new JButton("Back");
 		jButton8.setBounds(40, 230, 150, 40);
-		jButton9 = new JButton("Login");
-		jButton9.setBounds(200, 230, 150, 40);
+		jButtonLoginLogin = new JButton("Login");
+		jButtonLoginLogin.setBounds(200, 230, 150, 40);
 		
 	
 		loginPanel.add(jTextField1);
@@ -218,7 +218,7 @@ public class NewWind {
 		loginPanel.add(jLabelLoginUserName);
 		loginPanel.add(jLabelLoginPassword);
 		loginPanel.add(jButton8);
-		loginPanel.add(jButton9);
+		loginPanel.add(jButtonLoginLogin);
 		loginPanel.add(jLabelPicLogin);
 	
 		
@@ -335,6 +335,18 @@ public class NewWind {
 		fopanel.add(fomenuPanel);
 		fopanel.revalidate();
 		fopanel.repaint();
+		});
+		
+		//Login/login gomb lekezelese
+		jButtonLoginLogin.addActionListener((ActionEvent e) -> {
+		//eltavolitsuk a fõ menut tartalmazo panelt, s beszurjuk a guset menut tartalmazot
+			//fopanel.setVisible(false);
+			//fopanel.revalidate();
+			//fopanel.repaint();
+			//fopanel.setEnabled(false);
+			
+			DrawGame drawGame = new DrawGame();
+			drawGame.PaintGame();
 		});
 	}
 	
