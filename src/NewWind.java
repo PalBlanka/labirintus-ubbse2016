@@ -344,8 +344,11 @@ public class NewWind {
 			//fopanel.revalidate();
 			//fopanel.repaint();
 			//fopanel.setEnabled(false);
+			LevelGenerator levelGenerator= new LevelGenerator();
+			levelGenerator.Generate(26);
 			
 			DrawGame drawGame = new DrawGame();
+			
 			drawGame.PaintGame();
 		});
 	}

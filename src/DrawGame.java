@@ -51,7 +51,7 @@ int x=0;
 		 */
 		 
 		 sorokszama=0;
-		 readTxt("rajz.txt");
+		 readTxt("level.txt");
 		 for(int i=0;i<sorokszama;i++){
 			 ArrayList<Integer> arrayListHelp = new ArrayList<Integer>();
 			 arrayListHelp.clear();
@@ -144,7 +144,7 @@ int x=0;
 	public void PaintGame() {
 		// TODO Auto-generated method stub
 		gameFrame = new JFrame();
-		gameFrame.setTitle("Labirintus Game");
+		gameFrame.setTitle("Labirintus Game ");
 		gameFrame.setBounds(300,20,700,700);
 		DrawGame drawImage = new DrawGame();
 		gameFrame.add(drawImage);
