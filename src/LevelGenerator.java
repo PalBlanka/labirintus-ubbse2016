@@ -16,6 +16,9 @@ public class LevelGenerator {
 	//ez tarolja majd a szintek nehezseget
 	ArrayList<Integer> nehezsegiFokszam = new ArrayList<Integer>();
 	
+	// jatekos koordinatai
+	int xgamer=10,ygamer=10;
+	
 	//Ez irja ki a file-ba a palya
 	private void writeInFile() {
 		// TODO Auto-generated method stub
@@ -303,7 +306,12 @@ public class LevelGenerator {
 		
 		//GenerateLevel(0,levelpoint);
 		
+		dravGamer();
+		
 		writeInFile();
+		
+		
+		
 		System.out.println(nehezsegiFokszam);
 		
 	}
@@ -311,6 +319,20 @@ public class LevelGenerator {
 
 
 	
+
+	private void dravGamer() {
+		// TODO Auto-generated method stub
+		inner.add(3);
+		inner.add(4);
+		inner.add(xgamer);
+		inner.add(ygamer);
+		inner.add(10);
+		inner.add(10);
+		level.add(inner);
+	
+		inner = new ArrayList<Integer>(inner);
+		inner.clear();
+	}
 
 	private void CircleDraw() {
 		// TODO Auto-generated method stub

@@ -345,11 +345,13 @@ public class NewWind {
 			//fopanel.repaint();
 			//fopanel.setEnabled(false);
 			LevelGenerator levelGenerator= new LevelGenerator();
-			levelGenerator.Generate(26);
+			//itt a zarojelben a nehezseget adjuk meg
+			levelGenerator.Generate(15);
 			
 			DrawGame drawGame = new DrawGame();
 			
 			drawGame.PaintGame();
+			
 		});
 	}
 	

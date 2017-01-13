@@ -1,54 +1,40 @@
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
-
-public class DrawGame extends JPanel implements ActionListener{
+public class DrawGame extends JPanel implements ActionListener, KeyListener{
 JFrame gameFrame = new JFrame();
 JPanel gamePanel = new JPanel();
 ArrayList arrayListGame = new ArrayList();
 Integer sorokszama=0;
 
-Timer t = new Timer(40,this);
+Timer t = new Timer(40, this);
 int x=0;
+
+// jatekos koordinatai
+int xgamer=100,ygamer=30;
+//a jatekos mozgatasahoz
+public boolean fel, le, jobb, bal;
+
 	public void paint(Graphics g){
 		
 		g.setColor(Color.LIGHT_GRAY);
 		g.clearRect(0, 0, 700, 700);
 		
 		g.setColor(Color.blue);
-		setSize(700,700);
+		setSize(700,700); 
 		
-		/* 
-		
-		
-		 
-		 
-		 
-		 
-		 
-		
-		 
-		
-		 */
 		 
 		 sorokszama=0;
 		 readTxt("level.txt");
@@ -63,7 +49,8 @@ int x=0;
 		 }
 		 		 
 		 
-		 
+		
+			 
 		 
 		 t.start();
 		
@@ -95,17 +82,12 @@ int x=0;
 		//ez a korcikk
 			case 3:		g.fillArc(arrayListHelp.get(2), arrayListHelp.get(3), arrayListHelp.get(4), arrayListHelp.get(5), (arrayListHelp.get(6)*x)+arrayListHelp.get(7), arrayListHelp.get(8));
 						break;
+		//ez a jatekos
+			case 4:		g.fillOval(arrayListHelp.get(2)+xgamer, arrayListHelp.get(3)+ygamer, arrayListHelp.get(4), arrayListHelp.get(5));
+						break;
 			default:	
 						break;
-		}
-	
-		
-		
-		
-		
-		
-		
-		
+		}		
 	}
 
 	private ArrayList<Integer> felbontKomp(String string) {
@@ -121,8 +103,6 @@ int x=0;
 	}
 
 	private void readTxt(String string) {
-		
-		
 		
 		arrayListGame.clear();
 		// TODO Auto-generated method stub
@@ -143,23 +123,119 @@ int x=0;
 	
 	public void PaintGame() {
 		// TODO Auto-generated method stub
+		
 		gameFrame = new JFrame();
 		gameFrame.setTitle("Labirintus Game ");
 		gameFrame.setBounds(300,20,700,700);
+		gameFrame.addKeyListener(this);
 		DrawGame drawImage = new DrawGame();
 		gameFrame.add(drawImage);
 		gameFrame.setVisible(true);
+		
+		
 	}
+	
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		repaint();
+		
 		if (x< 360){
 			x++;
 		}
 		else {
 			x=0;
 		}
+		
+		
+		xgamer++;
+		
+		/* 
+		if (bal == true){
+			 xgamer--;
+			 System.out.println("lenyomval");
+		}
+		if (jobb == true){
+			 xgamer++;
+			 System.out.println("lenyomval");
+		}
+		*/
 	}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		 
+		//System.out.println("lenyomva");
+		
+
+		    if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		    	System.out.println("bal");
+		    	//bal=true;
+		        xgamer=xgamer-5;
+		        
+		        System.out.println("xgame:="+xgamer);
+		    }
+
+		    if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		    	System.out.println("jobb");
+		    	//jobb=true;
+		    	xgamer=xgamer+5;
+		    	System.out.println("xgame:="+xgamer);
+		    }
+
+		    if (e.getKeyCode() == KeyEvent.VK_UP) {
+		    	System.out.println("fel");
+		    	//fel=true;
+		    	ygamer--;
+		    	System.out.println("ygame:="+ygamer);
+		    }
+
+		    if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+		    	System.out.println("le");
+		    	//le=true;
+		    	ygamer++;
+		    	System.out.println("ygame:="+ygamer);
+		    }
+		   
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		/*if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            System.out.println("Right key typed");
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            System.out.println("Left key typed");
+        }*/
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		 /*if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		    	System.out.println("bal");
+		    	bal=false;
+		        xgamer=xgamer-5;
+		    }
+
+		    if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		    	System.out.println("jobb");
+		    	jobb=false;
+		    	xgamer=xgamer+5;
+		    }
+
+		    if (e.getKeyCode() == KeyEvent.VK_UP) {
+		    	System.out.println("fel");
+		    	fel=false;
+		    	ygamer--;
+		    }
+
+		    if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+		    	System.out.println("le");
+		    	le=false;
+		    	ygamer++;
+		    }
+		    */
+	}
+
 	
 }
