@@ -23,7 +23,8 @@ Timer t = new Timer(40, this);
 int x=0;
 
 // jatekos koordinatai
-int xgamer=100,ygamer=30;
+int xgamer=335,ygamer=335;
+int T=10,R=100;
 //a jatekos mozgatasahoz
 public boolean fel, le, jobb, bal;
 
@@ -129,7 +130,8 @@ public boolean fel, le, jobb, bal;
 		gameFrame.setBounds(300,20,700,700);
 		gameFrame.addKeyListener(this);
 		DrawGame drawImage = new DrawGame();
-		gameFrame.add(drawImage);
+		//gameFrame.add(drawImage);
+		gameFrame.add(this);
 		gameFrame.setVisible(true);
 		
 		
@@ -148,18 +150,8 @@ public boolean fel, le, jobb, bal;
 		}
 		
 		
-		xgamer++;
 		
-		/* 
-		if (bal == true){
-			 xgamer--;
-			 System.out.println("lenyomval");
-		}
-		if (jobb == true){
-			 xgamer++;
-			 System.out.println("lenyomval");
-		}
-		*/
+		
 	}
 	
 	@Override
@@ -186,14 +178,14 @@ public boolean fel, le, jobb, bal;
 		    if (e.getKeyCode() == KeyEvent.VK_UP) {
 		    	System.out.println("fel");
 		    	//fel=true;
-		    	ygamer--;
+		    	ygamer=ygamer-5;
 		    	System.out.println("ygame:="+ygamer);
 		    }
 
 		    if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 		    	System.out.println("le");
 		    	//le=true;
-		    	ygamer++;
+		    	ygamer=ygamer+5;
 		    	System.out.println("ygame:="+ygamer);
 		    }
 		   
