@@ -23,8 +23,9 @@ Timer t = new Timer(40, this);
 int x=0;
 
 // jatekos koordinatai
-int xgamer=335,ygamer=335;
-int T=10,R=100;
+int xgamer=345,ygamer=345;
+int R=100;
+double T=2;
 //a jatekos mozgatasahoz
 public boolean fel, le, jobb, bal;
 
@@ -84,7 +85,7 @@ public boolean fel, le, jobb, bal;
 			case 3:		g.fillArc(arrayListHelp.get(2), arrayListHelp.get(3), arrayListHelp.get(4), arrayListHelp.get(5), (arrayListHelp.get(6)*x)+arrayListHelp.get(7), arrayListHelp.get(8));
 						break;
 		//ez a jatekos
-			case 4:		g.fillOval(arrayListHelp.get(2)+xgamer, arrayListHelp.get(3)+ygamer, arrayListHelp.get(4), arrayListHelp.get(5));
+			case 4:		g.fillOval((int)(xgamer+(R*Math.cos(T))), (int)(ygamer+(R*Math.sin(T))), arrayListHelp.get(4), arrayListHelp.get(5));
 						break;
 			default:	
 						break;
@@ -163,30 +164,30 @@ public boolean fel, le, jobb, bal;
 		    if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 		    	System.out.println("bal");
 		    	//bal=true;
-		        xgamer=xgamer-5;
+		    	T=T-0.1;
 		        
-		        System.out.println("xgame:="+xgamer);
+		        System.out.println("T:="+T);
 		    }
 
 		    if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 		    	System.out.println("jobb");
 		    	//jobb=true;
-		    	xgamer=xgamer+5;
-		    	System.out.println("xgame:="+xgamer);
+		    	T=T+0.1;
+		    	System.out.println("T:="+T);
 		    }
 
 		    if (e.getKeyCode() == KeyEvent.VK_UP) {
 		    	System.out.println("fel");
 		    	//fel=true;
-		    	ygamer=ygamer-5;
-		    	System.out.println("ygame:="+ygamer);
+		    	R=R+4;
+		    	System.out.println("R:="+R);
 		    }
 
 		    if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 		    	System.out.println("le");
 		    	//le=true;
-		    	ygamer=ygamer+5;
-		    	System.out.println("ygame:="+ygamer);
+		    	R=R-4;
+		    	System.out.println("R:="+R);
 		    }
 		   
 	}

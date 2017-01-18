@@ -17,7 +17,7 @@ public class LevelGenerator {
 	ArrayList<Integer> nehezsegiFokszam = new ArrayList<Integer>();
 	
 	// jatekos koordinatai
-	int xgamer=10,ygamer=10;
+	int xgamer=0,ygamer=0;
 	
 	//Ez irja ki a file-ba a palya
 	private void writeInFile() {
