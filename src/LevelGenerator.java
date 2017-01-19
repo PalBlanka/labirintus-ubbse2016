@@ -65,7 +65,7 @@ public class LevelGenerator {
 				
 				inner = new ArrayList<Integer>(inner);
 				inner.clear();
-				
+				szin=5;
 				inner.add(szin);
 				inner.add(3);
 				inner.add(x1);
@@ -307,6 +307,7 @@ public class LevelGenerator {
 		//GenerateLevel(0,levelpoint);
 		
 		dravGamer();
+		drawKey();
 		
 		writeInFile();
 		
@@ -319,6 +320,70 @@ public class LevelGenerator {
 
 
 	
+
+	private void drawKey() {
+		// TODO Auto-generated method stub
+		szin=4;
+		inner.add(szin);
+		inner.add(5);
+		inner.add(320);
+		inner.add(320);
+		inner.add(40);
+		inner.add(40);
+		inner.add(0);
+		inner.add(355);
+		inner.add(10);
+		
+		level.add(inner);
+		
+		inner = new ArrayList<Integer>(inner);
+		inner.clear();
+		
+		inner.add(szin);
+		inner.add(5);
+		inner.add(335);
+		inner.add(335);
+		inner.add(10);
+		inner.add(10);
+		inner.add(0);
+		inner.add(270);
+		inner.add(4);
+		
+		level.add(inner);
+		
+		inner = new ArrayList<Integer>(inner);
+		inner.clear();
+		
+		inner.add(szin);
+		inner.add(5);
+		inner.add(339);
+		inner.add(335);
+		inner.add(10);
+		inner.add(10);
+		inner.add(0);
+		inner.add(270);
+		inner.add(4);
+		
+		level.add(inner);
+		
+		inner = new ArrayList<Integer>(inner);
+		inner.clear();
+		
+		inner = new ArrayList<Integer>(inner);
+		inner.clear();
+		
+		inner.add(szin);
+		inner.add(5);
+		inner.add(337);
+		inner.add(335);
+		inner.add(10);
+		inner.add(10);
+		inner.add(0);
+		inner.add(270);
+		inner.add(4);
+		
+		level.add(inner);
+	}
 
 	private void dravGamer() {
 		// TODO Auto-generated method stub

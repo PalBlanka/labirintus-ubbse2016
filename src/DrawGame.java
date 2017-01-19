@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -26,6 +27,8 @@ int x=0;
 int xgamer=345,ygamer=345;
 int R=100;
 double T=2;
+//ez a valtozo jeloli, hogy felvett-k e a kulcsot vagy nem
+boolean kulcs=true;
 //a jatekos mozgatasahoz
 public boolean fel, le, jobb, bal;
 
@@ -70,6 +73,14 @@ public boolean fel, le, jobb, bal;
 	 					break;
 			case 4:		g.setColor (Color.green);
 						break;
+			case 5:		if (kulcs==true){
+							g.setColor (Color.DARK_GRAY);
+						}
+						else{
+							g.setColor (Color.blue);
+						}
+			
+			break;
 	 		default:	g.setColor (Color.yellow);
 						break;
 		}
@@ -87,9 +98,18 @@ public boolean fel, le, jobb, bal;
 		//ez a jatekos
 			case 4:		g.fillOval((int)(xgamer+(R*Math.cos(T))), (int)(ygamer+(R*Math.sin(T))), arrayListHelp.get(4), arrayListHelp.get(5));
 						break;
+						//ez a korcikk
+			case 5:		if (kulcs==true){
+						g.fillArc(arrayListHelp.get(2), arrayListHelp.get(3), arrayListHelp.get(4), arrayListHelp.get(5), (arrayListHelp.get(6)*x)+arrayListHelp.get(7), arrayListHelp.get(8));
+						}
+						break;
+						
 			default:	
 						break;
-		}		
+		}	
+		//*g.drawLine(200,200,201,201);
+		//System.out.println(g.getColor());
+		
 	}
 
 	private ArrayList<Integer> felbontKomp(String string) {
@@ -151,6 +171,16 @@ public boolean fel, le, jobb, bal;
 		}
 		
 		
+		/*
+		int clr=  getRGB(100,100);
+		this.getBackground(100,100);
+		
+		/*
+		Point p;
+		System.out.println(getPixel(100,100));
+		Color color;
+		 color.getColor(100,100);
+		*/
 		
 		
 	}
@@ -159,12 +189,18 @@ public boolean fel, le, jobb, bal;
 	public void keyPressed(KeyEvent e) {
 		 
 		//System.out.println("lenyomva");
-		
+			if(kulcs == true){
+				System.out.println("kulcs ellenorzes");
+				if (R<10){
+					kulcs=false;
+					System.out.println("atalitva");
+				}
+			}
 
 		    if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 		    	System.out.println("bal");
 		    	//bal=true;
-		    	T=T-0.1;
+		    	T=T-0.06;
 		        
 		        System.out.println("T:="+T);
 		    }
@@ -172,22 +208,24 @@ public boolean fel, le, jobb, bal;
 		    if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 		    	System.out.println("jobb");
 		    	//jobb=true;
-		    	T=T+0.1;
+		    	T=T+0.06;
 		    	System.out.println("T:="+T);
 		    }
 
 		    if (e.getKeyCode() == KeyEvent.VK_UP) {
 		    	System.out.println("fel");
 		    	//fel=true;
-		    	R=R+4;
+		    	R=R+6;
 		    	System.out.println("R:="+R);
 		    }
 
 		    if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 		    	System.out.println("le");
 		    	//le=true;
-		    	R=R-4;
+		    	if (R-6>0){
+		    	R=R-6;
 		    	System.out.println("R:="+R);
+		    	}
 		    }
 		   
 	}

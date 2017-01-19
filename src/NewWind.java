@@ -40,8 +40,8 @@ public class NewWind {
 	JButton questButton = new JButton();
 	
 	//Quest
-	JButton jButton4 = new JButton();
-	JButton jButton5 = new JButton();
+	JButton jButtonBeginner = new JButton();
+	JButton jButtonAdvenced = new JButton();
 	JButton jButton6 = new JButton();
 	JButton jButton7 = new JButton();
 	
@@ -170,11 +170,11 @@ public class NewWind {
 		
 		//gombok szövegének, illetve méretének beálitása
 		//ez a quest kepernyo gombjai
-		jButton4 = new JButton("Beginner");
-		jButton4.setBounds(10, 100, 120, 30);
+		jButtonBeginner = new JButton("Beginner");
+		jButtonBeginner.setBounds(10, 100, 120, 30);
 		       
-		jButton5 = new JButton("Advanced");
-		jButton5.setBounds(135, 100, 120, 30);
+		jButtonAdvenced = new JButton("Advanced");
+		jButtonAdvenced.setBounds(135, 100, 120, 30);
 		        
 		jButton6 = new JButton("Professional");
 		jButton6.setBounds(260, 100, 120, 30);
@@ -183,8 +183,8 @@ public class NewWind {
 		jButton7.setBounds(120, 200, 150, 40);
 		        
 		//komponensek egybefûzése a quest kepernyon
-		questPanel.add(jButton4);
-		questPanel.add(jButton5);
+		questPanel.add(jButtonBeginner);
+		questPanel.add(jButtonAdvenced);
 		questPanel.add(jButton6);
 		questPanel.add(jButton7);
 		questPanel.add(jLabelPicQuest);
@@ -291,6 +291,26 @@ public class NewWind {
 			fopanel.revalidate();
 			fopanel.repaint();
         });
+		
+		
+		//Quest/Beginner gomb lekezelese
+		jButtonBeginner.addActionListener((ActionEvent e) -> {
+			LevelGenerator levelGenerator= new LevelGenerator();
+			//itt a zarojelben a nehezseget adjuk meg
+			levelGenerator.Generate(15);
+			DrawGame drawGame = new DrawGame();
+			drawGame.PaintGame();
+					
+		});
+		
+		jButtonAdvenced.addActionListener((ActionEvent e) -> {
+			LevelGenerator levelGenerator= new LevelGenerator();
+			//itt a zarojelben a nehezseget adjuk meg
+			levelGenerator.Generate(45);
+			DrawGame drawGame = new DrawGame();
+			drawGame.PaintGame();
+					
+		});
 		
 		//Back gomb lekezelese a quest menu alatt
 		jButton7.addActionListener((ActionEvent e) -> {
