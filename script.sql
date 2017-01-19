@@ -1,12 +1,20 @@
+
+ drop table Felhasznalo;
+
 CREATE TABLE Felhasznalo(
-	ID INT PRIMARY KEY,
-	Name VARCHAR(30),
-	PassW VARCHAR(15),
-	Level VARCHAR(10) CHECK (Level in ('beginner', 'advanced', 'professional'))
+	Nev VARCHAR(30) PRIMARY KEy,
+	Jelszo VARCHAR(15),
+	Szint VARCHAR(10) CHECK (Szint in ('beginner', 'advanced', 'professional'))
 )
 
-CREATE TABLE Statisztika(
-	S_ID INT PRIMARY KEY,
-	ID INT REFERENCES Felhasznalo(ID),
-	BestTime TIME
+drop table Mail;
+CREATE TABLE Mail(
+	Cim VARCHAR(50) PRIMARY KEY
 )
+drop table Maile;
+ CREATE TABLE Maile(
+	Nev VARCHAR(30) FOREIGN KEY REFERENCES Felhasznalo(Nev),
+	Cim VARCHAR(50) FOREIGN KEY REFERENCES Mail(Cim),
+ )
+
+ 
