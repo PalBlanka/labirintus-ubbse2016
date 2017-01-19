@@ -42,7 +42,7 @@ public class NewWind {
 	//Quest
 	JButton jButtonBeginner = new JButton();
 	JButton jButtonAdvenced = new JButton();
-	JButton jButton6 = new JButton();
+	JButton jButtonProfessional = new JButton();
 	JButton jButton7 = new JButton();
 	
 	//Login
@@ -176,8 +176,8 @@ public class NewWind {
 		jButtonAdvenced = new JButton("Advanced");
 		jButtonAdvenced.setBounds(135, 100, 120, 30);
 		        
-		jButton6 = new JButton("Professional");
-		jButton6.setBounds(260, 100, 120, 30);
+		jButtonProfessional = new JButton("Professional");
+		jButtonProfessional.setBounds(260, 100, 120, 30);
 		
 		jButton7 = new JButton("Back");
 		jButton7.setBounds(120, 200, 150, 40);
@@ -185,7 +185,7 @@ public class NewWind {
 		//komponensek egybefûzése a quest kepernyon
 		questPanel.add(jButtonBeginner);
 		questPanel.add(jButtonAdvenced);
-		questPanel.add(jButton6);
+		questPanel.add(jButtonProfessional);
 		questPanel.add(jButton7);
 		questPanel.add(jLabelPicQuest);
 		
@@ -303,6 +303,7 @@ public class NewWind {
 					
 		});
 		
+		//Quest/Advenced gomb lekezelese
 		jButtonAdvenced.addActionListener((ActionEvent e) -> {
 			LevelGenerator levelGenerator= new LevelGenerator();
 			//itt a zarojelben a nehezseget adjuk meg
@@ -311,6 +312,19 @@ public class NewWind {
 			drawGame.PaintGame();
 					
 		});
+		
+
+		//Quest/Professional gomb lekezelese
+		jButtonProfessional.addActionListener((ActionEvent e) -> {
+			LevelGenerator levelGenerator= new LevelGenerator();
+			//itt a zarojelben a nehezseget adjuk meg
+			levelGenerator.Generate(45);
+			DrawGame drawGame = new DrawGame();
+			drawGame.PaintGame();
+					
+		});
+		
+		
 		
 		//Back gomb lekezelese a quest menu alatt
 		jButton7.addActionListener((ActionEvent e) -> {
@@ -360,16 +374,15 @@ public class NewWind {
 		//Login/login gomb lekezelese
 		jButtonLoginLogin.addActionListener((ActionEvent e) -> {
 		//eltavolitsuk a fõ menut tartalmazo panelt, s beszurjuk a guset menut tartalmazot
-			//fopanel.setVisible(false);
-			//fopanel.revalidate();
-			//fopanel.repaint();
-			//fopanel.setEnabled(false);
 			LevelGenerator levelGenerator= new LevelGenerator();
 			//itt a zarojelben a nehezseget adjuk meg
+			
+			DBConnect connect = new DBConnect();
+			String help1 = null,help2 = null;
+			Integer visszajelz = connect.Connect(help1,help2);
+			
 			levelGenerator.Generate(15);
-			
 			DrawGame drawGame = new DrawGame();
-			
 			drawGame.PaintGame();
 			
 		});
