@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -11,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -47,7 +49,7 @@ public class NewWind {
 	
 	//Login
 	JTextField jTextField1 = new JTextField();
-	JTextField jTextField2 = new JTextField();
+	JPasswordField jPasswordField2 = new JPasswordField();
 	JButton jButton8 = new JButton();
 	JButton jButtonLoginLogin = new JButton();
 	JLabel jLabelLoginUserName = new JLabel();
@@ -56,8 +58,8 @@ public class NewWind {
 	//Register
 		JTextField jTextFieldRegisterUserName = new JTextField();
 		JTextField jTextFieldRegisterEmail = new JTextField();
-		JTextField jTextFieldRegisterPassword1 = new JTextField();
-		JTextField jTextFieldRegisterPassword2 = new JTextField();
+		JPasswordField jPasswordFieldPassword1 = new JPasswordField();
+		JPasswordField jPasswordFieldPassword2 = new JPasswordField();
 		JLabel jLabelRegistrationUserName = new JLabel();
 		JLabel jLabelRegistrationEmail = new JLabel();
 		JLabel jLabelRegisterPassword = new JLabel();
@@ -200,8 +202,8 @@ public class NewWind {
 		jLabelLoginUserName.setBounds(50, 100, 110, 30);
 		jLabelLoginUserName.setForeground(Color.WHITE);
 		
-		jTextField2 = new JTextField();
-		jTextField2.setBounds(160, 140, 160, 30);
+		jPasswordField2 = new JPasswordField();
+		jPasswordField2.setBounds(160, 140, 160, 30);
 		
 		jLabelLoginPassword =new JLabel("Password", SwingConstants.CENTER);
 		jLabelLoginPassword.setBounds(50, 140, 110, 30);
@@ -214,7 +216,7 @@ public class NewWind {
 		
 	
 		loginPanel.add(jTextField1);
-		loginPanel.add(jTextField2);
+		loginPanel.add(jPasswordField2);
 		loginPanel.add(jLabelLoginUserName);
 		loginPanel.add(jLabelLoginPassword);
 		loginPanel.add(jButton8);
@@ -237,15 +239,15 @@ public class NewWind {
 		jLabelRegistrationEmail.setBounds(50, 90, 110, 30);
 		jLabelRegistrationEmail.setForeground(Color.WHITE);
 		
-		jTextFieldRegisterPassword1 = new JTextField();
-		jTextFieldRegisterPassword1.setBounds(160, 130, 160, 30);
+		jPasswordFieldPassword1 = new JPasswordField();
+		jPasswordFieldPassword1.setBounds(160, 130, 160, 30);
 				
 		jLabelRegisterPassword =new JLabel("Password", SwingConstants.CENTER);
 		jLabelRegisterPassword.setBounds(50, 130, 110, 30);
 		jLabelRegisterPassword.setForeground(Color.WHITE);
 		
-		jTextFieldRegisterPassword2 = new JTextField();
-		jTextFieldRegisterPassword2.setBounds(160, 170, 160, 30);
+		jPasswordFieldPassword2 = new JPasswordField();
+		jPasswordFieldPassword2.setBounds(160, 170, 160, 30);
 		
 		jLabelRegisterPasswordAgain =new JLabel("Password Again", SwingConstants.CENTER);
 		jLabelRegisterPasswordAgain.setBounds(50, 170, 110, 30);
@@ -263,9 +265,9 @@ public class NewWind {
 		registerPanel.add(jLabelRegistrationUserName);
 		registerPanel.add(jLabelRegistrationEmail);
 		registerPanel.add(jTextFieldRegisterEmail);
-		registerPanel.add(jTextFieldRegisterPassword1);
+		registerPanel.add(jPasswordFieldPassword1);
 		registerPanel.add(jLabelRegisterPassword);
-		registerPanel.add(jTextFieldRegisterPassword2);
+		registerPanel.add(jPasswordFieldPassword2);
 		registerPanel.add(jLabelRegisterPasswordAgain);
 		registerPanel.add(jButtonRegisterBack);
 		registerPanel.add(jButtonRegisterAccept);
@@ -342,6 +344,7 @@ public class NewWind {
 		fopanel.add(loginPanel);
 		fopanel.revalidate();
 		fopanel.repaint();
+		
 		});
 		
 		//Login/Back gomb lekezelese
@@ -361,6 +364,40 @@ public class NewWind {
 		fopanel.revalidate();
 		fopanel.repaint();
 		});
+		
+		//Register/Accept gomb lekzelese
+		jButtonRegisterAccept.addActionListener((ActionEvent e) -> {
+		ArrayList<String> adatok = new ArrayList<String>();
+		
+		adatok.add(0, jTextFieldRegisterUserName.getText());
+		adatok.add(1, jTextFieldRegisterEmail.getText());
+		char[] pass1_c = jPasswordFieldPassword1.getPassword();
+		char[] pass2_c =jPasswordFieldPassword2.getPassword();
+		String pass1_s = String.valueOf(pass1_c);
+		String pass2_s = String.valueOf(pass2_c);
+		adatok.add(2, pass1_s);
+		adatok.add(3, pass2_s);
+		
+		LevelGenerator levelGenerator= new LevelGenerator();
+		DBConnect regisztral = new DBConnect();
+		Integer visszajelez = regisztral.regisztralas(adatok);
+		
+		if (visszajelez > -1){
+			levelGenerator.Generate(visszajelez);
+			DrawGame drawGame = new DrawGame();
+			drawGame.PaintGame();
+		}
+		else {if(visszajelez == -1){
+				Hiba hiba = new Hiba();
+				hiba.uzenet("A felhasználónév már foglalt!");
+				}
+			else {
+				Hiba hiba = new Hiba();
+				hiba.uzenet("A két jelszó nem egyezik meg!");
+			}
+		}
+		
+		});
 				
 		//Register/Back gomb lekezelese
 		jButtonRegisterBack.addActionListener((ActionEvent e) -> {
@@ -378,13 +415,20 @@ public class NewWind {
 			//itt a zarojelben a nehezseget adjuk meg
 			
 			DBConnect connect = new DBConnect();
-			String help1 = null,help2 = null;
-			Integer visszajelz = connect.Connect(help1,help2);
-			
-			levelGenerator.Generate(15);
-			DrawGame drawGame = new DrawGame();
-			drawGame.PaintGame();
-			
+
+			String nev = jTextField1.getText();
+			char[] pass_c = jPasswordField2.getPassword();
+			String pass = String.valueOf(pass_c);
+			Integer visszajelez = connect.Connect(nev, pass);
+			if (visszajelez > -1){
+				levelGenerator.Generate(visszajelez);
+				DrawGame drawGame = new DrawGame();
+				drawGame.PaintGame();
+			}
+			else{
+				Hiba hiba = new Hiba();
+				hiba.uzenet("Érvénytelen felhasználó vagy jelszó!");
+			}
 		});
 	}
 	
