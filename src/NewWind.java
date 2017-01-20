@@ -381,7 +381,7 @@ public class NewWind {
 			String help1 = null,help2 = null;
 			Integer visszajelz = connect.Connect(help1,help2);
 			
-			levelGenerator.Generate(15);
+			levelGenerator.Generate(11);
 			DrawGame drawGame = new DrawGame();
 			drawGame.PaintGame();
 			

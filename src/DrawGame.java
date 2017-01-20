@@ -28,10 +28,11 @@ Integer sorokszama=0;
 Timer t = new Timer(40, this);
 int x=0;
 
-// jatekos koordinatai
+// jatekos koordinata4
 int xgamer=345,ygamer=345;
-int R=100;
-double T=2;
+int R=280;
+//double T=3.14;
+double T=3.14;
 //ez a valtozo jeloli, hogy felvett-k e a kulcsot vagy nem
 boolean kulcs=true;
 //a jatekos mozgatasahoz
@@ -177,6 +178,33 @@ boolean figyelo = true;
 			x=0;
 		}
 		
+		//ideiglenesen kiveve
+		
+		
+		Container c = getRootPane();
+		BufferedImage im = new BufferedImage(700, 700, BufferedImage.TYPE_INT_ARGB);
+		((Container) c).paint(im.getGraphics());
+		int clr=  im.getRGB((int)(xgamer+(R*Math.cos(T))), (int)(ygamer+(R*Math.sin(T)))); 
+		if (clr == -16776961){
+		// System.out.println("kek "+ clr);
+		}
+		if (clr == -16777216){
+		//	 System.out.println("Feket "+ clr);
+		}
+		//ha fekete a babu alatt a terulet akkor megnezi, hogy jobbra, vagy balra kek e es eltolja a babut
+		if(clr == -16777216){
+			int clr1=  im.getRGB((int)(xgamer+(R*Math.cos(T+0.06))), (int)(ygamer+(R*Math.sin(T+0.06))));
+			int clr2=  im.getRGB((int)(xgamer+(R*Math.cos(T-0.06))), (int)(ygamer+(R*Math.sin(T-0.06))));
+			if  (clr1 ==  -16776961){
+				T=T+0.08;
+			}
+			if  (clr2 ==  -16776961){
+				T=T-0.08;
+			}
+		}
+		  
+		  
+		/*
 		//buffered image keszitese
 		//bImage.getGraphics();
 		
@@ -187,9 +215,11 @@ boolean figyelo = true;
 
 
 
-				Container c = getRootPane();
+				
+				Container c = getContentPane();
 				BufferedImage im = new BufferedImage(700, 700, BufferedImage.TYPE_INT_ARGB);
-				c.paint(im.getGraphics());
+				((Container) c).paint(im.getGraphics());
+				
 				
 				
 				figyelo=false;
@@ -203,42 +233,111 @@ boolean figyelo = true;
 				}
 			}
 		}
+		*/
 		//a kep piceljenek lekerese
 		
 		
 	}
 	
+	private Container getJFrame() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Container getJPanel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
-		 
-		//System.out.println("lenyomva");
+		//elkeszitti a kontrol kepet
+		Container c = getRootPane();
+		BufferedImage im = new BufferedImage(700, 700, BufferedImage.TYPE_INT_ARGB);
+		((Container) c).paint(im.getGraphics());
+		int clr=  im.getRGB((int)(xgamer+(R*Math.cos(T))), (int)(ygamer+(R*Math.sin(T))));
+		
+		//ez kezeli le a kulcs felveveset
 			if(kulcs == true){
 				System.out.println("kulcs ellenorzes");
 				if (R<10){
 					kulcs=false;
-					System.out.println("atalitva");
 				}
 			}
-
+			/*
 		    if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 		    	System.out.println("bal");
-		    	//bal=true;
-		    	T=T-0.06;
-		        
-		        System.out.println("T:="+T);
+		    	if (T-0.056<-6.3){
+		    		T=0;
+		    	}
+		    	else{
+		    		if((0<T && T<1.57) || (-4.72>T && T<6.3)){
+		    			int clr2=  im.getRGB((int)(xgamer+(R*Math.cos(T-0.056))), (int)(ygamer+(R*Math.sin(T-0.056))));
+		    			if (clr2 == -16776961){
+							T=T-0.056;
+						}
+		    		}
+		    		if((1.57<T && T<3.15) || (-3.15>T && T>-4.72)){
+		    			int clr2=  im.getRGB((int)(xgamer+(R*Math.cos(T-0.056))), (int)(ygamer+10+(R*Math.sin(T-0.056))));
+		    			if (clr2 == -16776961){
+							T=T-0.056;
+						}
+		    		}
+		    		if((3.15<T && T<4.72) || (-3.15>T && T<-1.57)){
+		    			int clr2=  im.getRGB((int)(xgamer+(R*Math.cos(T-0.056))), (int)(ygamer+10+(R*Math.sin(T-0.056))));
+		    			if (clr2 == -16776961){
+							T=T-0.056;
+						}
+		    		}
+		    	}	
+		    
+		    }
+		    	
+		    }*/
+
+			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		    	System.out.println("bal");
+		    	if (T-0.056<-6.3){
+		    		int clr2=  im.getRGB((int)(xgamer+(R*Math.cos(T-0.06))), (int)(ygamer+(R*Math.sin(T-0.06))));
+					if (clr2 == -16776961){
+						T=0;
+					}
+		    	}
+		    	else{
+		    	int clr2=  im.getRGB((int)(xgamer+(R*Math.cos(T+0.06))), (int)(ygamer+(R*Math.sin(T+0.06))));
+				if (clr2 == -16776961){
+					T=T-0.06;
+				
+		    	
+		    	}
+				System.out.println("T:="+T);
 		    }
 
-		    if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			}
+			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 		    	System.out.println("jobb");
-		    	//jobb=true;
-		    	T=T+0.06;
-		    	System.out.println("T:="+T);
+		    	if (T+0.056>6.3){
+		    		int clr2=  im.getRGB((int)(xgamer+(R*Math.cos(T+0.06))), (int)(ygamer+(R*Math.sin(T+0.06))));
+					if (clr2 == -16776961){
+						T=0;
+					}
+		    	}
+		    	else{
+		    	int clr2=  im.getRGB((int)(xgamer+(R*Math.cos(T+0.06))), (int)(ygamer+(R*Math.sin(T+0.06))));
+				if (clr2 == -16776961){
+					T=T+0.056;
+		    	}
+				System.out.println("T:="+T);
 		    }
 
 		    if (e.getKeyCode() == KeyEvent.VK_UP) {
 		    	System.out.println("fel");
+		    	int clr2=  im.getRGB((int)(xgamer+((R+6)*Math.cos(T))), (int)(ygamer+((R+6)*Math.sin(T))));
+				if (clr2 == -16776961){
+					R=R+6;
+				}
 		    	//fel=true;
-		    	R=R+6;
+		    	
 		    	System.out.println("R:="+R);
 		    }
 
@@ -246,10 +345,14 @@ boolean figyelo = true;
 		    	System.out.println("le");
 		    	//le=true;
 		    	if (R-6>0){
-		    	R=R-6;
+		    	int clr2=  im.getRGB((int)(xgamer+((R-6)*Math.cos(T))), (int)(ygamer+((R-6)*Math.sin(T))));
+				if (clr2 == -16776961){
+						R=R-6;
+				}
 		    	System.out.println("R:="+R);
 		    	}
 		    }
+			}
 		   
 	}
 
