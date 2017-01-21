@@ -1,0 +1,7 @@
+jdk:
+	-oraclejdk8
+sudo: false
+addons:
+	apt:
+		packeges:
+			-oracle-java8-installer
