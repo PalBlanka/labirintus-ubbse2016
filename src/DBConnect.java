@@ -33,8 +33,8 @@ import java.util.ArrayList;
 					String szint = rs.getString("Szint");
 					if (pass.equals(passw)){
 						switch(szint){
-							case "beginner" : szintNehezseg = 1;break;
-							case "advanced" : szintNehezseg = 16; break;
+							case "beginner" : szintNehezseg = 10;break;
+							case "advanced" : szintNehezseg = 22; break;
 							case "professional" : szintNehezseg = 50; break;
 						}
 					}
@@ -87,7 +87,7 @@ import java.util.ArrayList;
 						stmt_3.executeQuery("INSERT INTO Mail VALUES('"+mail+"');");
 						Statement stmt_4 = con.createStatement();
 						stmt_4.executeQuery("INSERT INTO Maile VALUES('"+nev+"', '"+mail+"');");
-						szintNehezseg = 5;
+						szintNehezseg = 10;
 					}
 				
 			}

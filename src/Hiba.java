@@ -12,6 +12,7 @@ public class Hiba {
 		hibaAblak.setTitle("Hiba!");
 		hibaAblak.setBounds(350, 350, 400, 100);
 		hibaAblak.add(uzenet);
+		
 		hibaAblak.setVisible(true);
 	}
 

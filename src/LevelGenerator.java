@@ -87,6 +87,8 @@ public class LevelGenerator {
 				inner = new ArrayList<Integer>(inner);
 				inner.clear();
 				
+				szin=1;
+				
 				inner.add(szin);
 				inner.add(1);
 				inner.add(x1);
