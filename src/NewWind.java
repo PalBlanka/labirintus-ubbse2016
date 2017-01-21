@@ -159,7 +159,7 @@ public class NewWind {
 		registrationButton = new JButton("Registration");
 		registrationButton.setBounds(120, 150, 150, 40);
         
-		questButton = new JButton("Quest");
+		questButton = new JButton("Guest");
 		questButton.setBounds(120, 200, 150, 40);
         
         //komponensek egybefûzése a kezdo kepernyon
